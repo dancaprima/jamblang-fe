@@ -4,14 +4,15 @@ import ImageUploading from 'react-images-uploading';
 
 const ImageUploader = () => {
   const [images, setImages] = useState([]);
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
-  const maxNumber = 5;
+  const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
+
+  const handleSubmitImage = () => {
+    console.log(images)
+  }
 
   return (
     <div className='upload'>
@@ -48,14 +49,20 @@ const ImageUploader = () => {
             <div className='image-preview-wrapper'>
               {imageList.map((image, index) => (
                 <div key={index}>
-                  <img
-                    src={image['data_url']}
-                    alt=''
-                    className='image-preview'
-                    onClick={() => onImageUpdate(index)}
-                  />
-                  <div>
-                    <button onClick={() => onImageRemove(index)}>Remove</button>
+                  <div className='image-preview'>
+                    <img
+                      src={image['data_url']}
+                      alt=''
+                      onClick={() => onImageUpdate(index)}
+                    />
+                  </div>
+                  <div className='image-preview-btn'>
+                    <div>
+                      <button onClick={() => onImageRemove(index)} className='btn btn-secondary'>Hapus</button>
+                    </div>
+                    <div>
+                      <button onClick={handleSubmitImage} className='btn btn-primary'>Proses</button>
+                    </div>
                   </div>
                 </div>
               ))}

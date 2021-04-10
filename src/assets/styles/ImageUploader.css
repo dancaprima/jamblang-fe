@@ -13,12 +13,34 @@
 
 .upload-btn {
   cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .upload-btn img {
   max-width: 200px;
 }
 
+.upload-btn button {
+  padding: 20px 30px;
+}
+
 .image-preview {
+  background: #efefef;
+  padding: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.image-preview img {
   max-height: 550px;
+}
+
+.image-preview-btn {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: 120px 180px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
