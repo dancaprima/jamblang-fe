@@ -23,9 +23,9 @@ async function postData(url = '', data = {}) {
 
 const VideoStream = (props) => {
   const videoConstraints = {
-    width: 480,
-    height: 700,
-    facingMode: "user"
+    width: { min: 270, max: 270 },
+    height: { min: 480, max: 480},
+    facingMode: "environment"
   };
   const webcamRef = React.useRef(null);
   const API_URL = 'https://agfo64wl93.execute-api.us-east-1.amazonaws.com/v1/api/barcode/upload'
