@@ -48,19 +48,6 @@
   justify-content: center;
 }
 
-@media only screen and (max-width: 480px) {
-
-  .image-preview img {
-    max-height: 300px;
-  }
-
-  .image-preview-btn {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-}
-
 .box {
   position: absolute;
   border: 2px solid red;
@@ -72,4 +59,21 @@
 
 .popup-btn {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+
+  .image-preview img {
+    max-height: 300px;
+  }
+
+  .image-preview-btn {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .bin {
+    font-size: 12px;
+  }
+
 }

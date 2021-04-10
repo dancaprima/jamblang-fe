@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-     {type === null && <>
+      {type === null && <>
         <div className="home-container">
           <span>
           <button onClick={() => setType('image')}><div style={{ marginRight: '5px'}}>
@@ -19,8 +19,8 @@ function App() {
         </div>
       </>}
     
-     {type === 'image' && <ImageUploader />}
-{type === 'video' && <VideoStream />  }
+      {type === 'image' && <ImageUploader />}
+      {type === 'video' && <VideoStream />  }
     </div>
   );
 }

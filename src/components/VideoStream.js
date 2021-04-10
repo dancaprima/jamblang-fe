@@ -43,10 +43,14 @@ const VideoStream = (props) => {
     [webcamRef]
   );
 
-   return <div style={{ position: 'relative'}}><Webcam videoConstraints={videoConstraints} ref={webcamRef} audio={false} />
+  return <div style={{
+    position: 'relative',
+    overflowY: 'auto',
+    height: '100%',
+  }}><Webcam videoConstraints={videoConstraints} ref={webcamRef} audio={false} />
        <div class="laser"></div>
        <img src={image} style={{width: '100%'}}/>
-</div>
+  </div>
 }
 
 export default VideoStream
