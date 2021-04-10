@@ -15,16 +15,16 @@ const ImageUploader = () => {
 
   const handleSubmitImage = () => {
     setIsLoading(true);
-    let bodyFormData = new FormData();
-    bodyFormData.append('barcode_image', images[0].data_url);
+    let formData = new FormData();
+
+    formData.append('barcode_image', images[0].file);
 
     axios({
       method: 'post',
       url: 'https://agfo64wl93.execute-api.us-east-1.amazonaws.com/v1/api/barcode/upload',
-      data: bodyFormData,
+      data: formData,
       headers: { 
-        'Content-Type': 'application/json',
-        'Referrer-Policy': 'no-referrer'
+        'Content-Type': 'multipart/form-data'
       },
     })
       .then(function (response) {
