@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import SkeletonLoading from 'react-loading-skeleton';
 import BarcodeImage from '../assets/images/barcode.png';
+import CloseIcon from '../assets/images/close.png';
 import ImageUploading from 'react-images-uploading';
 
 const ImageUploader = () => {
@@ -9,6 +10,8 @@ const ImageUploader = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [resultData, setResultData] = useState([]);
   const [previewDimension, setPreviewDimension] = useState({});
+  const [isModalBoxActive, setIsModalBoxActive] = useState(false);
+  const [modalBoxData, setModalBoxData] = useState({});
   const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -47,8 +50,53 @@ const ImageUploader = () => {
       });
   }
 
+  const handleOpenModal = (aBin, aSku, aZone) => {
+    setModalBoxData({
+      binData: aBin,
+      skuData: aSku,
+      zoneData: aZone
+    });
+
+    setIsModalBoxActive(true);
+  };
+
+  const renderModalBox = () => {
+
+    return (
+      <div
+        className='modalbox'
+        style={{
+          display: `${isModalBoxActive ? 'grid' : 'none'}`,
+        }} 
+      >
+        <div className='modalbox-content'>
+          <img
+            src={CloseIcon}
+            alt='close modal'
+            className='close-icon'
+            onClick={() => setIsModalBoxActive(false)}
+          />
+          <div className='modalbox-data'>
+            <div>{`SKU: ${modalBoxData?.skuData}`}</div>
+            <div>{`BIN: ${modalBoxData?.binData}`}</div>
+          </div>
+          <img src={modalBoxData?.zoneData} alt='zone' />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='upload'>
+      <div
+        className='overlay'
+        style={{
+          display: `${isModalBoxActive ? 'block' : 'none'}`,
+        }} 
+        onClick={() => setIsModalBoxActive(false)}
+      >
+        {renderModalBox()}
+      </div>
       <ImageUploading
         multiple={true}
         value={images}
@@ -116,7 +164,11 @@ const ImageUploader = () => {
                                 const styleHeight = coordinateHeight * previewDimension?.height;
 
                                 return (
-                                  <div key={index} className='popup-btn'>
+                                  <div
+                                    key={index}
+                                    className='popup-btn'
+                                    onClick={() => handleOpenModal(BinCode, SKU, Zone)}
+                                  >
                                     <div
                                       className='box'
                                       style={{
