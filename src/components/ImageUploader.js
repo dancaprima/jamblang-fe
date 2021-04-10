@@ -26,12 +26,11 @@ const ImageUploader = () => {
   const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    var contentType = 'image/png';
 
-    const blobdata = b64toBlob(imageList[0].data_url, contentType);
-console.log(imageList[0].data_url)
-    console.log(blobdata)
+    setImages(imageList);
+
+    // data for submit
+
   };
 
   const handleSubmitImage = () => {

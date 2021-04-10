@@ -22,7 +22,11 @@ async function postData(url = '', data = {}) {
  
 
 const VideoStream = (props) => {
-
+  const videoConstraints = {
+    width: 350,
+    height: 1280,
+    facingMode: "user"
+  };
   const webcamRef = React.useRef(null);
   const API_URL = 'https://agfo64wl93.execute-api.us-east-1.amazonaws.com/v1/api/barcode/upload'
   useEffect(() => {
@@ -39,7 +43,9 @@ const VideoStream = (props) => {
     [webcamRef]
   );
 
-   return <> <Webcam ref={webcamRef} audio={false} /><button onClick={capture}>Capture</button></>;
+   return <div style={{ position: 'relative'}}><Webcam videoConstraints={videoConstraints} ref={webcamRef} audio={false} />
+       <div class="laser"></div>
+</div>
 }
 
 export default VideoStream
