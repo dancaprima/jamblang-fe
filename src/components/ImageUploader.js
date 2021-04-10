@@ -4,13 +4,33 @@ import SkeletonLoading from 'react-loading-skeleton';
 import BarcodeImage from '../assets/images/barcode.png';
 import ImageUploading from 'react-images-uploading';
 
+function b64toBlob(b64Data, contentType, sliceSize) {
+  var contentType = contentType || '';
+  var sliceSize = sliceSize || 512;
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+  }
+  return new Blob(byteArrays, {type: contentType});
+}
 const ImageUploader = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
+
     setImages(imageList);
+
+    // data for submit
+
   };
 
   const handleSubmitImage = () => {
@@ -44,7 +64,7 @@ const ImageUploader = () => {
   return (
     <div className='upload'>
       <ImageUploading
-        multiple
+        multiple={true}
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}

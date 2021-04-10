@@ -7,6 +7,37 @@ body {
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  width: 100%;
+}
+
+.home-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.home-container button{
+  width: 100%;
+  background: gainsboro;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 8px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  height: 55px;
+  font-weight: bold;
+}
+
+.home-container span{
+  margin: auto;
+  width: 100%;
+}
 
 a {
   color: inherit;
@@ -65,7 +96,7 @@ header {
 }
 
 .App {
-  padding: 0 20px;
+  padding: 0;
   border: 20px solid #efefefef;
   height: 100vh;
   overflow: hidden;
@@ -94,9 +125,53 @@ header {
   
   header {
     padding: 30px 35px;
+    z-index: 999;
   }
 
   .logo {
     max-width: 100px;
+  }
+}
+
+
+.preloader-scan {
+  position: fixed;
+  left: 0;
+  right: 0;
+  max-width: 500px;
+  display: table;
+  margin: 0 auto;
+  height: 300px;
+  text-align: center;
+}
+
+ 
+.laser {
+  width: 500px;
+  height: 300px;
+  margin: 0;
+  background-color: tomato;
+  height: 1px;
+  position: absolute;
+  top: 0%;
+  z-index: 2;
+  left: 0;
+  box-shadow: 0 0 4px red;
+  animation: scanning 3s infinite;
+}
+
+.diode {
+  animation: beam .01s infinite;
+}
+
+@keyframes beam {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanning {
+  50% {
+    transform: translateY(500px);
   }
 }
