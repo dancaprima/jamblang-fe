@@ -15,8 +15,9 @@ const History = () => {
               display: `${openModal ? 'grid' : 'none'}`,
             }} 
           >
-            <div className='modalbox-content'>
+            <div style={{ paddingTop: '50px'}} className='modalbox-content'>
               <img
+                style={{}}
                 src={CloseIcon}
                 alt='close modal'
                 className='close-icon'
@@ -39,7 +40,7 @@ const History = () => {
         {renderModalBox()}
       </div>
         {
-            data.map(d => 
+            data?.map(d => 
             <div className="card-history">
                 <h3>
                  SKU:   {d.SKU}
@@ -54,6 +55,9 @@ const History = () => {
             </div>
             )
         }
+        {!data && <div style={{ display: 'flex', minHeight: '100vh'}}> 
+            <h5 style={{ margin: 'auto', fontSize: '16px'}}>Data Kosong</h5>
+        </div>}
     </div>
 }
 
