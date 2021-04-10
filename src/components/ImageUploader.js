@@ -24,7 +24,8 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 const ImageUploader = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [resultData, setResultData] = useState({});
+  const [resultData, setResultData] = useState([]);
+  const [previewDimension, setPreviewDimension] = useState({});
   const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -47,14 +48,24 @@ const ImageUploader = () => {
       .then((response) => {
         setResultData(response)
         setIsLoading(false);
+
+        const box = document.getElementById('preview-image');
+        const width = box.offsetWidth;
+        const height = box.offsetHeight;
+
+        setPreviewDimension({
+          width,
+          height
+        });
+
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   }
 
-  console.log(resultData);
+  console.log(previewDimension);
+  console.log(resultData.data)
 
   return (
     <div className='upload'>
@@ -68,7 +79,6 @@ const ImageUploader = () => {
         {({
           imageList,
           onImageUpload,
-          onImageRemoveAll,
           onImageUpdate,
           onImageRemove,
           isDragging,
@@ -97,15 +107,68 @@ const ImageUploader = () => {
                       isLoading ? <SkeletonLoading height={500} width={300} /> : (
                         <div>
                           <div className='image-preview'>
-                            <img
-                              src={image['data_url']}
-                              alt=''
-                              onClick={() => onImageUpdate(index)}
-                            />
+                            {
+                              resultData?.data?.length > 0 ? (
+                                <img
+                                  src={image['data_url']}
+                                  alt=''
+                                  id='preview-image'
+                                />
+                              ) : (
+                                <img
+                                  src={image['data_url']}
+                                  alt=''
+                                  onClick={() => onImageUpdate(index)}
+                                  id='preview-image'
+                                />
+                              )
+                            }
+                            {
+                              resultData?.data?.map((box, index) => {
+                                const { BinCode, Geometry, SKU, Zone } = box;
+                                const coodinateLeft = Geometry?.BoundingBox?.Left;
+                                const coordinateTop = Geometry?.BoundingBox?.Top;
+                                const coodinateWidth = Geometry?.BoundingBox?.Width;
+                                const coordinateHeight = Geometry?.BoundingBox?.Height;
+                                const styleTop = coordinateTop * previewDimension?.height;
+                                const styleLeft = coodinateLeft * previewDimension?.width;
+                                const styleWidth = coodinateWidth * previewDimension?.width;
+                                const styleHeight = coordinateHeight * previewDimension?.height;
+
+                                return (
+                                  <div key={index} className='popup-btn'>
+                                    <div
+                                      className='box'
+                                      style={{
+                                        top: styleTop + 20,
+                                        left: styleLeft + 20,
+                                        width: styleWidth + 5,
+                                        height: styleHeight + 5
+                                      }}
+                                    />
+                                    <div
+                                      className='bin'
+                                      style={{
+                                      top: styleTop + 40,
+                                      left: styleLeft - 30,
+                                    }}>
+                                      {BinCode ? `Bin: ${BinCode}` : 'SKU Tidak ditemukan'}
+                                    </div>
+                                  </div>
+                                )
+                              })
+                            }
                           </div>
                           <div className='image-preview-btn'>
                             <div>
-                              <button onClick={() => onImageRemove(index)} className='btn btn-secondary'>Hapus</button>
+                              <button
+                                onClick={() => { 
+                                  onImageRemove(index);
+                                  setPreviewDimension({});
+                                  setResultData([]);
+                                }}
+                                className='btn btn-secondary'
+                              >Hapus</button>
                             </div>
                             <div>
                               <button onClick={handleSubmitImage} className='btn btn-primary'>Proses</button>
