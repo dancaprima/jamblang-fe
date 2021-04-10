@@ -83,6 +83,25 @@ button,
   background: #efefefef;
 }
 
+.card-history {
+  display: flex;
+  width: 100%;
+  padding: 8px 16px;
+  border: 1px solid lightgray;
+  flex-direction: column;
+  margin-top: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card-history h3{
+  margin: 5px 0;
+}
+
+.card-history span{
+  color: gray;
+}
+
 header {
   position: absolute;
   top: 0;

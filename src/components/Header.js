@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <header>
-      <img src={Logo} alt='logo jamscan' className='logo' />
+      <img onClick={() => history.push('/')} src={Logo} alt='logo jamscan' className='logo' />
       <span onClick={() => history.push('/history')}>
         <IconHistory />
       </span>
