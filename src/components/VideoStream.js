@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React , {useEffect, useState} from 'react';
 import Webcam from "react-webcam";
 
 async function postData(url = '', data = {}) {
@@ -22,9 +22,10 @@ async function postData(url = '', data = {}) {
  
 
 const VideoStream = (props) => {
+  const [image, setImage] = useState('')
   const videoConstraints = {
-    width: { min: 270, max: 270 },
-    height: { min: 480, max: 480},
+    width: { min: 320, max: 480 },
+    height: { min: 480, max: 1000},
     facingMode: "environment"
   };
   const webcamRef = React.useRef(null);
@@ -37,14 +38,14 @@ const VideoStream = (props) => {
   const capture = React.useCallback(
     async () => {
       const imageSrc = webcamRef.current.getScreenshot();
-     const data = await  postData(API_URL, { barcode_image: imageSrc })
-      console.log(data)
+     setImage(imageSrc)
     },
     [webcamRef]
   );
 
    return <div style={{ position: 'relative'}}><Webcam videoConstraints={videoConstraints} ref={webcamRef} audio={false} />
        <div class="laser"></div>
+       <img src={image} style={{width: '100%'}}/>
 </div>
 }
 
