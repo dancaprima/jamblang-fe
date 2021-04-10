@@ -20,23 +20,20 @@ function b64toBlob(b64Data, contentType, sliceSize) {
   }
   return new Blob(byteArrays, {type: contentType});
 }
+
 const ImageUploader = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [resultData, setResultData] = useState({});
   const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
-
     setImages(imageList);
-
-    // data for submit
-
   };
 
   const handleSubmitImage = () => {
     setIsLoading(true);
     let formData = new FormData();
-
     formData.append('barcode_image', images[0].file);
 
     axios({
@@ -47,19 +44,17 @@ const ImageUploader = () => {
         'Content-Type': 'multipart/form-data'
       },
     })
-      .then(function (response) {
-        //handle success
-        console.log(response);
+      .then((response) => {
+        setResultData(response)
         setIsLoading(false);
       })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
+      .catch((error) => {
+        console.log(error);
         setIsLoading(false);
       });
   }
 
-  console.log(isLoading);
+  console.log(resultData);
 
   return (
     <div className='upload'>
