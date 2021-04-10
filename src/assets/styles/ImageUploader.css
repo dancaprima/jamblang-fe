@@ -8,6 +8,15 @@
 .upload-wrapper {
   overflow: hidden;
   text-align: center;
+  display: grid;
+}
+
+.upload-btn {
+  cursor: pointer;
+}
+
+.upload-btn img {
+  max-width: 200px;
 }
 
 .image-preview {
