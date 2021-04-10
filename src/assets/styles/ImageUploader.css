@@ -1,0 +1,15 @@
+.upload {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-wrapper {
+  overflow: hidden;
+  text-align: center;
+}
+
+.image-preview {
+  max-height: 550px;
+}
