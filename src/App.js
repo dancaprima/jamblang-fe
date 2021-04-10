@@ -1,15 +1,17 @@
 import {useState} from 'react'
 import Header from './components/Header';
+import History from './components/History';
 import ImageUploader from './components/ImageUploader';
-import VideoStream from './components/VideoStream';
-import IconScanner from './components/IconScanner'
-import IconGallery from './components/IconGallery'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+
+} from "react-router-dom";
 function App() {
-  const [type, setType] = useState(null)
   return (
     <div className="App">
-      <Header />
-      {type === null && <>
+     {/* {type === null && <>
         <div className="home-container">
           <span>
           <button onClick={() => setType('image')}><div style={{ marginRight: '5px'}}>
@@ -17,10 +19,16 @@ function App() {
             <IconScanner /></div><div>Scan Barcode</div></button>
           </span>
         </div>
-      </>}
-    
-      {type === 'image' && <ImageUploader />}
-      {type === 'video' && <VideoStream />  }
+      </>} */}
+       <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/" children={<ImageUploader />} />
+          <Route exact path="/history" children={<History />} />
+        </Switch>
+
+       </Router>
+    {/* {type === 'video' && <VideoStream />  } */}
     </div>
   );
 }
