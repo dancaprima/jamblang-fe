@@ -88,3 +88,14 @@ header {
   color: #000;
   border: 1px solid #000;
 }
+
+
+@media only screen and (max-width: 480px) {
+  header {
+    padding: 30px 35px;
+  }
+
+  .logo {
+    max-width: 100px;
+  }
+}

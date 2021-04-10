@@ -44,3 +44,16 @@
   align-items: center;
   justify-content: center;
 }
+
+@media only screen and (max-width: 480px) {
+
+  .image-preview img {
+    max-height: 300px;
+  }
+
+  .image-preview-btn {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+}
