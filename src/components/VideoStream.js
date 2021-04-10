@@ -23,8 +23,8 @@ async function postData(url = '', data = {}) {
 
 const VideoStream = (props) => {
   const videoConstraints = {
-    width: 350,
-    height: 1280,
+    width: 480,
+    height: 700,
     facingMode: "user"
   };
   const webcamRef = React.useRef(null);
