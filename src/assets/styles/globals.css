@@ -97,7 +97,7 @@ header {
 .App {
   padding: 0;
   border: 20px solid #efefefef;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   max-width: 480px;
   position: relative;
