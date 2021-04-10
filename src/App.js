@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {type === null && <>
+     {/* {type === null && <>
         <div className="home-container">
           <span>
           <button onClick={() => setType('image')}><div style={{ marginRight: '5px'}}>
@@ -17,10 +17,10 @@ function App() {
             <IconScanner /></div><div>Scan Barcode</div></button>
           </span>
         </div>
-      </>}
+      </>} */}
     
-      {type === 'image' && <ImageUploader />}
-      {type === 'video' && <VideoStream />  }
+     <ImageUploader />
+    {/* {type === 'video' && <VideoStream />  } */}
     </div>
   );
 }

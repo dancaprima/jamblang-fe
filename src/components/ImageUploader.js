@@ -34,7 +34,8 @@ const ImageUploader = () => {
       .then((response) => {
         setResultData(response)
         setIsLoading(false);
-
+        const stringify = JSON.stringify(response)
+        localStorage.setItem(stringify)
         const box = document.getElementById('preview-image');
         const width = box.offsetWidth;
         const height = box.offsetHeight;
@@ -175,9 +176,15 @@ const ImageUploader = () => {
                                         top: styleTop + 20,
                                         left: styleLeft + 20,
                                         width: styleWidth + 5,
-                                        height: styleHeight + 5
+                                        height: styleHeight + 5,
                                       }}
-                                    />
+                                    > 
+                                      <div style={{ position: 'relative'}}>
+                                          <div style={{ position: 'absolute', left: '-20px'}}>
+                                              <img src={Zone} style={{ width: '100%'}} />
+                                          </div>
+                                      </div>
+                                    </div>
                                     <div
                                       className='bin'
                                       style={{
