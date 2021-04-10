@@ -35,7 +35,7 @@ const ImageUploader = () => {
         setResultData(response)
         setIsLoading(false);
         const stringify = JSON.stringify(response)
-        localStorage.setItem(stringify)
+        localStorage.setItem('history',stringify)
         const box = document.getElementById('preview-image');
         const width = box.offsetWidth;
         const height = box.offsetHeight;
