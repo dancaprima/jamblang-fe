@@ -8,8 +8,7 @@ body {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 video {
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+
 }
 
 .home-container {
